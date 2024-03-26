@@ -1,0 +1,3 @@
+[submodule "git-submodules/hello-world-js"]
+	path = git-submodules/hello-world-js
+	url = https://github.com/dhilt/hello-world-js

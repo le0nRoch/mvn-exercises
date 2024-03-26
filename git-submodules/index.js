@@ -1,7 +1,5 @@
 // mega ultra super duper cli tool
 
-function greet() {
-	console.log("Hello, World!");
-}
+const greeter = require("./hello-world-js");
 
-greet("world");
+console.log(greeter.hello());
