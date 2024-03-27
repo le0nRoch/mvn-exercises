@@ -6,6 +6,7 @@ Dieses Repository dient zur Ergebnissicherung der Aufgaben _Maven Artefakte_ aus
 
 - [Git Submodule](./git-submodules/doc.md)
 - [Was ist ein Maven Artefakt?](#was-ist-ein-maven-artefakt)
+- [Maven Repository](#maven-repository)
 
 ## Was ist ein Maven Artefakt?
 
@@ -54,3 +55,13 @@ Unterschied zwischen `SNAPSHOT` und `RELEASE`:
 - `SNAPSHOT`: Eine SNAPSHOT-Version ist eine Version, die sich noch in der Entwicklung befindet. SNAPSHOT-Versionen können sich bei jedem Build ändern. Beispeile für SNAPSHOT-Versionen sind: `1.0.0-SNAPSHOT`, `1.0.1-SNAPSHOT`, `1.0.2-SNAPSHOT`.
 
 - `RELEASE`: Eine RELEASE-Version ist eine Version, die für die Veröffentlichung bereit ist. RELEASE-Versionen sind stabil und sollten nicht geändert werden. Beispiele für RELEASE-Versionen sind: `1.0.0`, `1.0.1`, `1.0.2`.
+
+## Maven Repository
+
+**Lokales Repository auf Windows**:
+
+```cmd
+cd %USERPROFILE%\.m2\repository
+```
+
+Das Repository ist ein Verzeichnis hat eine Grösse von 1 GB.
