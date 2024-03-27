@@ -22,7 +22,7 @@ jobs:
         run: mvn -B package --file ${{ env.MAVEN_PROJECT_PATH }}
 
       - name: Publish to GitHub Packages Apache Maven
-        run: mvn deploy
+        run: mvn deploy --file ${{ env.MAVEN_PROJECT_PATH }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GITHUB_TOKEN is the GitHub Actions built-in secret
           GITHUB_ACTOR: ${{ github.actor }}
