@@ -27,4 +27,5 @@ jobs:
       - name: Publish to GitHub Packages
         run: mvn deploy --file ${{ env.MAVEN_PROJECT_PATH }}
         env:
+          GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GHCR_TOKEN }}
