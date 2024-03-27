@@ -7,6 +7,7 @@ Dieses Repository dient zur Ergebnissicherung der Aufgaben _Maven Artefakte_ aus
 - [Git Submodule](./git-submodules/doc.md)
 - [Was ist ein Maven Artefakt?](#was-ist-ein-maven-artefakt)
 - [Maven Repository](#maven-repository)
+- [Maven Artefakt lokal nutzen](#maven-artefakt-lokal-nutzen)
 
 ## Was ist ein Maven Artefakt?
 
@@ -65,3 +66,18 @@ cd %USERPROFILE%\.m2\repository
 ```
 
 Das Repository ist ein Verzeichnis hat eine Grösse von 1 GB.
+
+## Maven Artefakt lokal nutzen
+
+Als erstes habe ich ein Maven Projekt erstellt:
+
+![Calculator](./calculator.png)
+
+Es ist ein einfacher Taschenrechner, der zwei Zahlen addiert.
+Ich musste noch dem Befehele `mvn install` ausführen, um das Artefakt in das lokale Repository zu installieren.
+
+Als nächstes habe ich ein weiteres Maven Projekt erstellt und das erste Projekt als Abhängigkeit hinzugefügt:
+
+![Calculator-App](./calculator-user.png)
+
+Et voilà, ich konnte das Artefakt des ersten Projekts im zweiten Projekt verwenden.
