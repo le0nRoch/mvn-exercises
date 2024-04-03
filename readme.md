@@ -9,6 +9,7 @@ Dieses Repository dient zur Ergebnissicherung der Aufgaben _Maven Artefakte_ aus
 - [Maven Repository](#maven-repository)
 - [Maven Artefakt lokal nutzen](#maven-artefakt-lokal-nutzen)
 - [Maven Artefakt auf GitHub veröffentlichen](#maven-artefakt-auf-github-ver%C3%B6ffentlichen)
+- [Maven Artefakt von GitHub nutzen](#maven-artefakt-von-github-nutzen)
 
 ## Was ist ein Maven Artefakt?
 
