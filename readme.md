@@ -8,6 +8,7 @@ Dieses Repository dient zur Ergebnissicherung der Aufgaben _Maven Artefakte_ aus
 - [Was ist ein Maven Artefakt?](#was-ist-ein-maven-artefakt)
 - [Maven Repository](#maven-repository)
 - [Maven Artefakt lokal nutzen](#maven-artefakt-lokal-nutzen)
+- [Maven Artefakt auf GitHub veröffentlichen](#maven-artefakt-auf-github-ver%C3%B6ffentlichen)
 
 ## Was ist ein Maven Artefakt?
 
@@ -81,3 +82,5 @@ Als nächstes habe ich ein weiteres Maven Projekt erstellt und das erste Projekt
 ![Calculator-App](./calculator-user.png)
 
 Et voilà, ich konnte das Artefakt des ersten Projekts im zweiten Projekt verwenden.
+
+## Maven Artefakt auf GitHub veröffentlichen
