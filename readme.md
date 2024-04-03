@@ -84,3 +84,154 @@ Als nächstes habe ich ein weiteres Maven Projekt erstellt und das erste Projekt
 Et voilà, ich konnte das Artefakt des ersten Projekts im zweiten Projekt verwenden.
 
 ## Maven Artefakt auf GitHub veröffentlichen
+
+Als erstes habe ich die settings.xml Datei erstellt:
+
+```xml
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+    <servers>
+        <server>
+            <id>github</id>
+            <username>${env.GITHUB_ACTOR}</username>
+            <password>${env.GITHUB_TOKEN}</password>
+        </server>
+    </servers>
+</settings>
+```
+
+Dann habe ich die pom.xml Datei angepasst:
+
+```xml
+<distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub Packages</name>
+      <url>https://maven.pkg.github.com/le0nRoch/mvn-exercises</url>
+    </repository>
+  </distributionManagement>
+```
+
+Als nächstes habe ich Github Secrets hinterlegt:
+
+![github secrets erstellen](mvn-deploy-add-env.png)
+
+Zum Schluss habe ich die GitHub Actions erstellt:
+
+```yaml
+name: Maven Package
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      MAVEN_PROJECT_PATH: calculator/pom.xml
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 20
+        uses: actions/setup-java@v4
+        with:
+          distribution: "adopt"
+          java-version: "20"
+          server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
+          settings-path: ${{ github.workspace }} # location for the settings.xml file
+      - name: Build with Maven
+        run: mvn -B package --file ${{ env.MAVEN_PROJECT_PATH }}
+
+      - name: Publish to GitHub Packages Apache Maven
+        run: mvn deploy --file ${{ env.MAVEN_PROJECT_PATH }} -s $GITHUB_WORKSPACE/settings.xml
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GHCR_TOKEN }}
+```
+
+Et voilà, ich konnte das Artefakt auf GitHub veröffentlichen.
+
+![github packages](package-uploaded.png)
+
+## Maven Artefakt von GitHub nutzen
+
+Als erstes habe ich die settings.xml Datei erstellt:
+
+```xml
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+    <servers>
+        <server>
+            <id>github</id>
+            <username>
+                <!-- GitHub Username -->
+            </username>
+            <password>
+                <!-- Personal Access Token -->
+            </password>
+        </server>
+    </servers>
+</settings>
+```
+
+Dann habe ich die pom.xml Datei angepasst:
+
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>ch.bbw</groupId>
+    <artifactId>calculator-user</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>calculator-user</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+
+    <!-- Added repositories -->
+    <repositories>
+        <repository>
+            <id>github</id>
+            <name>Github packages</name>
+            <url>https://maven.pkg.github.com/le0nRoch/mvn-exercises</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Added dependency -->
+        <dependency>
+            <groupId>ch.bbw</groupId>
+            <artifactId>calculator</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+</project>
+```
+
+Zum Schluss habe ich die Maven Befehle ausgeführt:
+
+```cmd
+mvn install -s settings.xml
+```
+
+Et voilà, ich konnte das Artefakt von GitHub nutzen.
